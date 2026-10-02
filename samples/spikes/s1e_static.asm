@@ -1,0 +1,46 @@
+; S1E: Static
+; 7-segment 0-9 timeline followed by LED chase
+
+ORG 1000H
+
+JMP START
+
+SEG_CODES DB 3FH, 06H, 5BH, 4FH, 66H, 6DH, 7DH, 07H, 7FH, 6FH
+LED_CODES DB 01H, 02H, 04H, 08H
+
+START:
+    MOV AL, 80H
+    OUT 1FH, AL     ; 7-seg mode
+    
+MAIN_LOOP:
+    ; 7-Segment 0-9
+    MOV BX, OFFSET SEG_CODES
+    MOV CX, 10
+SEG_LOOP:
+    MOV AL, CS:[BX]
+    OUT 19H, AL
+    INC BX
+    CALL DELAY
+    LOOP SEG_LOOP
+    
+    ; LEDs
+    MOV BX, OFFSET LED_CODES
+    MOV CX, 4
+LED_LOOP:
+    MOV AL, CS:[BX]
+    OUT 1BH, AL
+    INC BX
+    CALL DELAY
+    LOOP LED_LOOP
+    
+    JMP MAIN_LOOP
+
+DELAY:
+    PUSH CX
+    MOV CX, 0FFFFH
+DL1:
+    LOOP DL1
+    POP CX
+    RET
+
+END START

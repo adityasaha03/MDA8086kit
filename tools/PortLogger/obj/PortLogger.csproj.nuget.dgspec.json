@@ -1,0 +1,55 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\Mda8086Kit\\tools\\PortLogger\\PortLogger.csproj": {}
+  },
+  "projects": {
+    "E:\\Mda8086Kit\\tools\\PortLogger\\PortLogger.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Mda8086Kit\\tools\\PortLogger\\PortLogger.csproj",
+        "projectName": "PortLogger",
+        "projectPath": "E:\\Mda8086Kit\\tools\\PortLogger\\PortLogger.csproj",
+        "packagesPath": "C:\\Users\\aditya\\.nuget\\packages\\",
+        "outputPath": "E:\\Mda8086Kit\\tools\\PortLogger\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\aditya\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "targetAlias": "net48",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "targetAlias": "net48",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.425\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win7-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}
