@@ -11,3 +11,4 @@
 
 ## Decisions
 - **G0 (PH0-11)**: Proceed with Phase 1. Matrix is feasible. LCD stream cannot be decoded reliably due to emu8086 caching (identical writes are merged). Chosen option (iv): ship with opt-in write-sequence include (using port 30H). Emulator reset detection (burst of zeros / file truncation) is needed and will be enabled by default.
+- **2026-10-02**: Backported R-14..R-16, Q-13..Q-15, T-08..T-09 into PRD based on Phase 0 findings.

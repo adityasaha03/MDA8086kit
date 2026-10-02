@@ -1,0 +1,130 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETFramework,Version=v4.8": {
+      "Mda8086Kit.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Mda8086Kit.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Mda8086Kit.Core.dll": {}
+        }
+      },
+      "Mda8086Kit.Io/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "Mda8086Kit.Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Mda8086Kit.Io.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Mda8086Kit.Io.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.8/win7-x86": {
+      "Mda8086Kit.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Mda8086Kit.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Mda8086Kit.Core.dll": {}
+        }
+      },
+      "Mda8086Kit.Io/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "Mda8086Kit.Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Mda8086Kit.Io.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Mda8086Kit.Io.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Mda8086Kit.Core/1.0.0": {
+      "type": "project",
+      "path": "../Mda8086Kit.Core/Mda8086Kit.Core.csproj",
+      "msbuildProject": "../Mda8086Kit.Core/Mda8086Kit.Core.csproj"
+    },
+    "Mda8086Kit.Io/1.0.0": {
+      "type": "project",
+      "path": "../Mda8086Kit.Io/Mda8086Kit.Io.csproj",
+      "msbuildProject": "../Mda8086Kit.Io/Mda8086Kit.Io.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETFramework,Version=v4.8": [
+      "Mda8086Kit.Core >= 1.0.0",
+      "Mda8086Kit.Io >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\aditya\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "E:\\Mda8086Kit\\src\\Mda8086Kit\\Mda8086Kit.csproj",
+      "projectName": "MDA8086_Kit",
+      "projectPath": "E:\\Mda8086Kit\\src\\Mda8086Kit\\Mda8086Kit.csproj",
+      "packagesPath": "C:\\Users\\aditya\\.nuget\\packages\\",
+      "outputPath": "E:\\Mda8086Kit\\src\\Mda8086Kit\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\aditya\\AppData\\Roaming\\NuGet\\NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net48"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net48": {
+          "targetAlias": "net48",
+          "projectReferences": {
+            "E:\\Mda8086Kit\\src\\Mda8086Kit.Core\\Mda8086Kit.Core.csproj": {
+              "projectPath": "E:\\Mda8086Kit\\src\\Mda8086Kit.Core\\Mda8086Kit.Core.csproj"
+            },
+            "E:\\Mda8086Kit\\src\\Mda8086Kit.Io\\Mda8086Kit.Io.csproj": {
+              "projectPath": "E:\\Mda8086Kit\\src\\Mda8086Kit.Io\\Mda8086Kit.Io.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      }
+    },
+    "frameworks": {
+      "net48": {
+        "targetAlias": "net48",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.425\\RuntimeIdentifierGraph.json"
+      }
+    },
+    "runtimes": {
+      "win7-x86": {
+        "#import": []
+      }
+    }
+  }
+}

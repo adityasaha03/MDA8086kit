@@ -1,0 +1,15 @@
+E:\Mda8086Kit\tools\PortLogAnalyzer\obj\Release\net8.0\PortLogAnalyzer.GeneratedMSBuildEditorConfig.editorconfig
+E:\Mda8086Kit\tools\PortLogAnalyzer\obj\Release\net8.0\PortLogAnalyzer.AssemblyInfoInputs.cache
+E:\Mda8086Kit\tools\PortLogAnalyzer\obj\Release\net8.0\PortLogAnalyzer.AssemblyInfo.cs
+E:\Mda8086Kit\tools\PortLogAnalyzer\obj\Release\net8.0\PortLogAnalyzer.csproj.CoreCompileInputs.cache
+E:\Mda8086Kit\tools\PortLogAnalyzer\obj\Release\net8.0\PortLogAnalyzer.sourcelink.json
+E:\Mda8086Kit\tools\PortLogAnalyzer\bin\Release\net8.0\PortLogAnalyzer.exe
+E:\Mda8086Kit\tools\PortLogAnalyzer\bin\Release\net8.0\PortLogAnalyzer.deps.json
+E:\Mda8086Kit\tools\PortLogAnalyzer\bin\Release\net8.0\PortLogAnalyzer.runtimeconfig.json
+E:\Mda8086Kit\tools\PortLogAnalyzer\bin\Release\net8.0\PortLogAnalyzer.dll
+E:\Mda8086Kit\tools\PortLogAnalyzer\bin\Release\net8.0\PortLogAnalyzer.pdb
+E:\Mda8086Kit\tools\PortLogAnalyzer\obj\Release\net8.0\PortLogAnalyzer.dll
+E:\Mda8086Kit\tools\PortLogAnalyzer\obj\Release\net8.0\refint\PortLogAnalyzer.dll
+E:\Mda8086Kit\tools\PortLogAnalyzer\obj\Release\net8.0\PortLogAnalyzer.pdb
+E:\Mda8086Kit\tools\PortLogAnalyzer\obj\Release\net8.0\PortLogAnalyzer.genruntimeconfig.cache
+E:\Mda8086Kit\tools\PortLogAnalyzer\obj\Release\net8.0\ref\PortLogAnalyzer.dll

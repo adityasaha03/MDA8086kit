@@ -693,3 +693,13 @@ A requirement passes when its unit test passes and, where an integration test ap
 | Version | Date | Notes |
 |---|---|---|
 | 0.1 | 2 Oct 2026 | Initial project summary and PRD from the lab manual, emu8086 device README and `io.cs` analysis. |
+
+## Backported IDs from S1 Spike
+- R-14: Emulator merges consecutive identical IO writes if too fast.
+- R-15: emu8086.hw is not created or used.
+- R-16: IO file is truncated to highest port, not 64KB.
+- Q-13: Does emu8086 write consecutive identical bytes reliably? (No)
+- Q-14: Is file size 64KB? (No, truncated)
+- Q-15: Is emu8086.hw used? (No)
+- T-08: Run S1 spikes to determine emulator behavior.
+- T-09: Write PortLogAnalyzer to determine feasibility.
