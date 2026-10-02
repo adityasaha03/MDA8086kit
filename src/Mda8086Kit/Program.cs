@@ -10,7 +10,7 @@ namespace Mda8086Kit
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form());
+            Application.Run(new MainForm());
         }
     }
 }

@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "MatrixTuner/1.0.0": {
+        "dependencies": {
+          "Mda8086Kit.Core": "1.0.0"
+        },
+        "runtime": {
+          "MatrixTuner.dll": {}
+        }
+      },
+      "Mda8086Kit.Core/1.0.0": {
+        "runtime": {
+          "Mda8086Kit.Core.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MatrixTuner/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Mda8086Kit.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

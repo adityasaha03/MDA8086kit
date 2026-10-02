@@ -1,97 +1,95 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
-using Mda8086Kit.Core;
+using Mda8086Kit.Core.Abstractions;
 
 namespace Mda8086Kit.Io
 {
-    public class EmuIoPortFile : IPortSource, IDisposable
+    public class EmuIoPortFile : IPortSource
     {
         private readonly string _path;
         private FileStream _stream;
-        private readonly byte[] _shadow = new byte[65536];
-        private long _previousLength = 0;
+
+        public ConnectionState State { get; private set; }
 
         public EmuIoPortFile(string path)
         {
-            _path = path ?? throw new ArgumentNullException(nameof(path));
+            _path = path;
+            State = new ConnectionState(ConnectionStatus.WaitingForEmu8086, "Waiting for emu8086", "Start emu8086 and run a program that uses the virtual device.");
         }
 
-        public IEnumerable<PortData> Poll(long currentUs)
+        public bool TryReadRange(int firstPort, byte[] buffer, int count)
         {
-            var changes = new List<PortData>();
-
-            if (_stream == null)
-            {
-                try
-                {
-                    if (File.Exists(_path))
-                    {
-                        _stream = new FileStream(_path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete, 1);
-                        _previousLength = _stream.Length;
-                    }
-                    else
-                    {
-                        return changes; // Not created yet
-                    }
-                }
-                catch (IOException)
-                {
-                    return changes; // Locked
-                }
-            }
-
             try
             {
-                long currentLength = _stream.Length;
-                if (currentLength < _previousLength)
+                if (_stream == null)
                 {
-                    // Truncation detected
-                    throw new InvalidOperationException("File was truncated (emulator reset).");
+                    _stream = new FileStream(_path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete);
+                    State = new ConnectionState(ConnectionStatus.Connected, "Connected", "");
                 }
-                _previousLength = currentLength;
 
-                if (currentLength == 0) return changes;
-
-                _stream.Seek(0, SeekOrigin.Begin);
-                byte[] buffer = new byte[currentLength];
-                int read = _stream.Read(buffer, 0, (int)currentLength);
-
-                for (int i = 0; i < read; i++)
+                long len = _stream.Length;
+                if (len <= firstPort)
                 {
-                    if (buffer[i] != _shadow[i])
-                    {
-                        changes.Add(new PortData(i, buffer[i], currentUs));
-                        _shadow[i] = buffer[i];
-                    }
+                    // File hasn't reached this port yet, nothing to read
+                    return true; 
                 }
+
+                int toRead = (int)Math.Min(count, len - firstPort);
+                _stream.Seek(firstPort, SeekOrigin.Begin);
+                int read = _stream.Read(buffer, 0, toRead);
+                
+                if (read < toRead)
+                {
+                    State = new ConnectionState(ConnectionStatus.PartialRead, "Partial Read", "emu8086 is still creating the file.");
+                    return false;
+                }
+
+                State = new ConnectionState(ConnectionStatus.Connected, "Connected", "");
+                return true;
+            }
+            catch (FileNotFoundException)
+            {
+                State = new ConnectionState(ConnectionStatus.WaitingForEmu8086, "Waiting for emu8086", "Start emu8086 and run a program.");
+                return false;
+            }
+            catch (UnauthorizedAccessException)
+            {
+                State = new ConnectionState(ConnectionStatus.AccessDenied, "Access Denied", "Check file permissions.");
+                return false;
+            }
+            catch (IOException ex) when ((ex.HResult & 0xFFFF) == 0x20 || (ex.HResult & 0xFFFF) == 0x21)
+            {
+                State = new ConnectionState(ConnectionStatus.Locked, "Locked", "File is locked by another process.");
+                return false;
             }
             catch (IOException)
             {
-                // Locked briefly by emulator writing
+                State = new ConnectionState(ConnectionStatus.IoError, "IO Error", "Check logs.");
+                return false;
             }
-
-            return changes;
         }
 
-        public void Reset()
+        public bool TryWriteByte(int port, byte value)
         {
-            Array.Clear(_shadow, 0, _shadow.Length);
-            _previousLength = 0;
-            if (_stream != null)
+            try
             {
-                _stream.Dispose();
-                _stream = null;
+                if (_stream == null) return false;
+                if (_stream.Length <= port) return false;
+
+                _stream.Seek(port, SeekOrigin.Begin);
+                _stream.WriteByte(value);
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
 
         public void Dispose()
         {
-            if (_stream != null)
-            {
-                _stream.Dispose();
-                _stream = null;
-            }
+            _stream?.Dispose();
+            _stream = null;
         }
     }
 }

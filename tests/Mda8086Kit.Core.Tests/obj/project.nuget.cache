@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lwbB+8qqv98=",
+  "dgSpecHash": "d4eEOjHB2tE=",
   "success": true,
-  "projectFilePath": "E:\\Mda8086Kit\\tests\\Mda8086Kit.Core.Tests\\Mda8086Kit.Core.Tests.csproj",
+  "projectFilePath": "e:\\Mda8086Kit\\tests\\Mda8086Kit.Core.Tests\\Mda8086Kit.Core.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\aditya\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
     "C:\\Users\\aditya\\.nuget\\packages\\microsoft.codecoverage\\17.8.0\\microsoft.codecoverage.17.8.0.nupkg.sha512",

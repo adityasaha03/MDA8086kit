@@ -1,10 +1,4 @@
 E:\Mda8086Kit\tests\Mda8086Kit.Io.Tests\bin\Debug\net8.0\CoverletSourceRootsMapping_Mda8086Kit.Io.Tests
-E:\Mda8086Kit\tests\Mda8086Kit.Io.Tests\obj\Debug\net8.0\Mda8086Kit.Io.Tests.csproj.AssemblyReference.cache
-E:\Mda8086Kit\tests\Mda8086Kit.Io.Tests\obj\Debug\net8.0\Mda8086Kit.Io.Tests.GeneratedMSBuildEditorConfig.editorconfig
-E:\Mda8086Kit\tests\Mda8086Kit.Io.Tests\obj\Debug\net8.0\Mda8086Kit.Io.Tests.AssemblyInfoInputs.cache
-E:\Mda8086Kit\tests\Mda8086Kit.Io.Tests\obj\Debug\net8.0\Mda8086Kit.Io.Tests.AssemblyInfo.cs
-E:\Mda8086Kit\tests\Mda8086Kit.Io.Tests\obj\Debug\net8.0\Mda8086Kit.Io.Tests.csproj.CoreCompileInputs.cache
-E:\Mda8086Kit\tests\Mda8086Kit.Io.Tests\obj\Debug\net8.0\Mda8086Kit.Io.Tests.sourcelink.json
 E:\Mda8086Kit\tests\Mda8086Kit.Io.Tests\bin\Debug\net8.0\testhost.dll
 E:\Mda8086Kit\tests\Mda8086Kit.Io.Tests\bin\Debug\net8.0\testhost.exe
 E:\Mda8086Kit\tests\Mda8086Kit.Io.Tests\bin\Debug\net8.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll
@@ -97,6 +91,12 @@ E:\Mda8086Kit\tests\Mda8086Kit.Io.Tests\bin\Debug\net8.0\Mda8086Kit.Core.dll
 E:\Mda8086Kit\tests\Mda8086Kit.Io.Tests\bin\Debug\net8.0\Mda8086Kit.Io.dll
 E:\Mda8086Kit\tests\Mda8086Kit.Io.Tests\bin\Debug\net8.0\Mda8086Kit.Io.pdb
 E:\Mda8086Kit\tests\Mda8086Kit.Io.Tests\bin\Debug\net8.0\Mda8086Kit.Core.pdb
+E:\Mda8086Kit\tests\Mda8086Kit.Io.Tests\obj\Debug\net8.0\Mda8086Kit.Io.Tests.csproj.AssemblyReference.cache
+E:\Mda8086Kit\tests\Mda8086Kit.Io.Tests\obj\Debug\net8.0\Mda8086Kit.Io.Tests.GeneratedMSBuildEditorConfig.editorconfig
+E:\Mda8086Kit\tests\Mda8086Kit.Io.Tests\obj\Debug\net8.0\Mda8086Kit.Io.Tests.AssemblyInfoInputs.cache
+E:\Mda8086Kit\tests\Mda8086Kit.Io.Tests\obj\Debug\net8.0\Mda8086Kit.Io.Tests.AssemblyInfo.cs
+E:\Mda8086Kit\tests\Mda8086Kit.Io.Tests\obj\Debug\net8.0\Mda8086Kit.Io.Tests.csproj.CoreCompileInputs.cache
+E:\Mda8086Kit\tests\Mda8086Kit.Io.Tests\obj\Debug\net8.0\Mda8086Kit.Io.Tests.sourcelink.json
 E:\Mda8086Kit\tests\Mda8086Kit.Io.Tests\obj\Debug\net8.0\Mda8086K.96D9C1A4.Up2Date
 E:\Mda8086Kit\tests\Mda8086Kit.Io.Tests\obj\Debug\net8.0\Mda8086Kit.Io.Tests.dll
 E:\Mda8086Kit\tests\Mda8086Kit.Io.Tests\obj\Debug\net8.0\refint\Mda8086Kit.Io.Tests.dll
