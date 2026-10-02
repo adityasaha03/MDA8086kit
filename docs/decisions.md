@@ -10,4 +10,4 @@
 - R-20: Device-owned bytes can be stale from previous runs.
 
 ## Decisions
-- (Placeholder for G0 and other decisions)
+- **G0 (PH0-11)**: Proceed with Phase 1. Matrix is feasible. LCD stream cannot be decoded reliably due to emu8086 caching (identical writes are merged). Chosen option (iv): ship with opt-in write-sequence include (using port 30H). Emulator reset detection (burst of zeros / file truncation) is needed and will be enabled by default.

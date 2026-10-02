@@ -15,8 +15,6 @@ namespace PortLogger
         [DllImport("winmm.dll")]
         private static extern uint timeEndPeriod(uint uPeriod);
 
-        private const string IoFilePath = @"C:\emu8086.io";
-        
         private static bool _running = true;
         private static readonly object _sync = new object();
         private static string _lastFiveChanges = "";
@@ -24,7 +22,7 @@ namespace PortLogger
 
         static void Main(string[] args)
         {
-            // Parse arguments
+            string ioFilePath = @"C:\emu8086.io";
             string mode = "1ms";
             int rangeStart = 0;
             int rangeCount = 256;
@@ -32,6 +30,7 @@ namespace PortLogger
 
             for (int i = 0; i < args.Length; i++)
             {
+                if (args[i] == "--io" && i + 1 < args.Length) ioFilePath = args[++i];
                 if (args[i] == "--mode" && i + 1 < args.Length) mode = args[++i];
                 if (args[i] == "--range" && i + 2 < args.Length)
                 {
@@ -41,7 +40,7 @@ namespace PortLogger
                 if (args[i] == "--out" && i + 1 < args.Length) outDir = args[++i];
             }
 
-            Console.WriteLine($"Starting PortLogger: mode={mode}, range={rangeStart}-{rangeStart+rangeCount}, out={outDir}");
+            Console.WriteLine($"Starting PortLogger: io={ioFilePath}, mode={mode}, range={rangeStart}-{rangeStart+rangeCount}, out={outDir}");
 
             // Setup output files
             string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
@@ -55,16 +54,16 @@ namespace PortLogger
                 try
                 {
                     // Open read-only
-                    ioStream = new FileStream(IoFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete);
+                    ioStream = new FileStream(ioFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete);
                 }
                 catch (FileNotFoundException)
                 {
-                    Console.WriteLine("Waiting for C:\\emu8086.io to be created...");
+                    Console.WriteLine($"Waiting for {ioFilePath} to be created...");
                     Thread.Sleep(250);
                 }
             }
 
-            Console.WriteLine("C:\\emu8086.io found. Starting capture (Press Ctrl+C to stop, or any letter to insert a marker).");
+            Console.WriteLine($"{ioFilePath} found. Starting capture (Press Ctrl+C to stop, or any letter to insert a marker).");
 
             Console.CancelKeyPress += (s, e) =>
             {
@@ -72,7 +71,7 @@ namespace PortLogger
                 _running = false;
             };
 
-            Thread captureThread = new Thread(() => CaptureLoop(ioStream, mode, rangeStart, rangeCount, changesCsv, filesCsv));
+            Thread captureThread = new Thread(() => CaptureLoop(ioFilePath, ioStream, mode, rangeStart, rangeCount, changesCsv, filesCsv));
             captureThread.Start();
 
             // Handle markers
@@ -96,7 +95,7 @@ namespace PortLogger
             Console.WriteLine("\nStopped cleanly.");
         }
 
-        private static void CaptureLoop(FileStream ioStream, string mode, int rangeStart, int rangeCount, string changesCsv, string filesCsv)
+        private static void CaptureLoop(string ioFilePath, FileStream ioStream, string mode, int rangeStart, int rangeCount, string changesCsv, string filesCsv)
         {
             if (mode == "1ms") timeBeginPeriod(1);
 
@@ -137,7 +136,7 @@ namespace PortLogger
 
                 if (sw.ElapsedMilliseconds - lastFileLogTicks > 250)
                 {
-                    FileInfo fi = new FileInfo(IoFilePath);
+                    FileInfo fi = new FileInfo(ioFilePath);
                     fi.Refresh();
                     long ms = sw.ElapsedMilliseconds;
                     filesWriter.WriteLine($"{ms},{fi.Length},{fi.LastWriteTimeUtc:o},0,,");

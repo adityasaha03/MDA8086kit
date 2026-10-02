@@ -5,8 +5,9 @@
 ORG 1000H
 
 START:
-    MOV AL, 1
+    MOV BL, 1
 OUTER_LOOP:
+    MOV AL, BL
     OUT 0DH, AL     ; N index 1..4
     
     MOV CX, 20      ; 20 bursts per N
@@ -14,39 +15,39 @@ BURST_LOOP:
     PUSH CX
     
     ; Burst with delay
-    MOV DL, 41H
-    OUT 04H, DL
+    MOV AL, 41H
+    OUT 04H, AL
     CALL DO_DELAY
     
-    MOV DL, 42H
-    OUT 04H, DL
+    MOV AL, 42H
+    OUT 04H, AL
     CALL DO_DELAY
     
-    MOV DL, 43H
-    OUT 04H, DL
+    MOV AL, 43H
+    OUT 04H, AL
     CALL DO_DELAY
     
-    MOV DL, 44H
-    OUT 04H, DL
+    MOV AL, 44H
+    OUT 04H, AL
     
     POP CX
     LOOP BURST_LOOP
     
-    INC AL
-    CMP AL, 5
+    INC BL
+    CMP BL, 5
     JNE OUTER_LOOP
     
     ; Reset and repeat
     JMP START
 
 DO_DELAY:
-    ; N=10, 100, 1000, 10000 based on AL
+    ; N=10, 100, 1000, 10000 based on BL
     PUSH CX
-    CMP AL, 1
+    CMP BL, 1
     JE SET_10
-    CMP AL, 2
+    CMP BL, 2
     JE SET_100
-    CMP AL, 3
+    CMP BL, 3
     JE SET_1000
     MOV CX, 10000
     JMP DELAY_LOOP
