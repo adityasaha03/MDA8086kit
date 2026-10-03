@@ -24,5 +24,10 @@ namespace Mda8086Kit.Core.Abstractions
             IsBulk = false;
             Reseeded = false;
         }
+
+        public void Sort(Comparison<PortChange> comparison)
+        {
+            _changes.Sort(comparison);
+        }
     }
 }

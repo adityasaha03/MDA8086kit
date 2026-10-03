@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PortLogger")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8990fd5c7816f8fb9ad545a9895d7cfb03f27956")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3c494567047e1bf3c0bd65fcb4ef081141f92cc0")]
 [assembly: System.Reflection.AssemblyProductAttribute("PortLogger")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PortLogger")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

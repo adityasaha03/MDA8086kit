@@ -49,6 +49,16 @@ namespace Mda8086Kit.Core.Kit
 
                     if (batch.Count > 0)
                     {
+                        // Ensure control ports (like 1EH) are processed BEFORE data ports
+                        batch.Sort((a, b) => 
+                        {
+                            bool aCtrl = (a.Port == 0x16 || a.Port == 0x1E);
+                            bool bCtrl = (b.Port == 0x16 || b.Port == 0x1E);
+                            if (aCtrl && !bCtrl) return -1;
+                            if (!aCtrl && bCtrl) return 1;
+                            return a.Port.CompareTo(b.Port);
+                        });
+                        
                         _controller.OnPoll(batch, sw.ElapsedMilliseconds);
                     }
                 }

@@ -18,8 +18,8 @@ namespace Mda8086Kit.Core.Kit
 
         public KitController()
         {
-            // 33ms window (~30 FPS), gain 8.0, 100ms smoothing, ticks are milliseconds
-            _matrixIntegrator = new Devices.PersistenceIntegrator(33, 8.0f, 100, 1);
+            // 33ms window, gain 8.0, 2000ms smoothing (2 seconds) for emu8086 IPC overhead
+            _matrixIntegrator = new Devices.PersistenceIntegrator(33, 8.0f, 50000, 1);
             
             _latestSnapshot = new KitSnapshot(
                 new ConnectionState(ConnectionStatus.WaitingForEmu8086, "Waiting", "Start emu8086"), 
@@ -79,7 +79,7 @@ namespace Mda8086Kit.Core.Kit
 
                 foreach (var device in _devices)
                 {
-                    if (device is Devices.Ppi8255 ppi && ppi.Name == "CS1")
+                    if (device is Devices.Ppi8255 ppi && ppi.Name == "CS2")
                     {
                         dotMatrixModel.Decode(
                             ppi.GetPinStateA(), 
@@ -106,7 +106,7 @@ namespace Mda8086Kit.Core.Kit
                     {
                         if (device is Devices.Ppi8255 ppi)
                         {
-                            if (ppi.Name == "CS2")
+                            if (ppi.Name == "CS1")
                             {
                                 var sevenSegModel = new Devices.SevenSegmentModel();
                                 var ledBank = new Devices.LedBank();

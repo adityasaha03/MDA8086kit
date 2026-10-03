@@ -9,12 +9,39 @@ namespace Mda8086Kit.Core.Devices
             redGrid = 0;
             greenGrid = 0;
             
-            // Port C is scan line (active-high). If undriven, no scan line is selected.
-            byte scan = (byte)(portC.Value & portC.DrivenMask);
+            byte valA = portA.Value;
+            byte valB = portB.Value;
+            byte valC = portC.Value;
+
+            byte scan;
+            byte redData;
+            byte greenData;
+
+            // Auto-detect the multiplexing scheme:
+            // matrix_a.asm scheme: Port C is scan (active-high, moving 1), Port B is Green (active-low), Port A is Red (active-low)
+            // dotMatrixA.asm scheme: Port B is scan (active-low, moving 0), Port C is Data (active-high), Port A is Data (active-low)
             
-            // Port A is red data (active-low). Port B is green data (active-low).
-            byte redData = (byte)(~portA.Value & portA.DrivenMask);
-            byte greenData = (byte)(~portB.Value & portB.DrivenMask);
+            // Check if Port C looks like an active-high scan line (only one bit set)
+            bool portCIsScan = (valC != 0) && ((valC & (valC - 1)) == 0);
+            
+            // Check if Port B looks like an active-low scan line (only one bit zero)
+            byte notB = (byte)~valB;
+            bool portBIsScan = (notB != 0) && ((notB & (notB - 1)) == 0);
+
+            if (portBIsScan && !portCIsScan)
+            {
+                // dotMatrixA.asm mode: Port B = Scan (active-low), Port C = Green Data (active-high), Port A = Red Data (active-low)
+                scan = (byte)(~portB.Value & portB.DrivenMask);
+                redData = (byte)(~portA.Value & portA.DrivenMask);
+                greenData = (byte)(portC.Value & portC.DrivenMask);
+            }
+            else
+            {
+                // Default / matrix_a.asm mode: Port C = Scan (active-high), Port B = Green Data (active-low), Port A = Red Data (active-low)
+                scan = (byte)(portC.Value & portC.DrivenMask);
+                redData = (byte)(~portA.Value & portA.DrivenMask);
+                greenData = (byte)(~portB.Value & portB.DrivenMask);
+            }
 
             for (int k = 0; k < 8; k++) // scan line (column in Normal)
             {

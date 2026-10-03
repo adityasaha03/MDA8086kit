@@ -116,8 +116,12 @@ namespace Mda8086Kit.Core.Devices
 
                 if (_smoothingMs > 0)
                 {
-                    RedDisplay[i] += alpha * (rDisp - RedDisplay[i]);
-                    GreenDisplay[i] += alpha * (gDisp - GreenDisplay[i]);
+                    // Instant attack (peak hold) for slow emulator multiplexing, slow decay
+                    if (rDisp > RedDisplay[i]) RedDisplay[i] = rDisp;
+                    else RedDisplay[i] += alpha * (rDisp - RedDisplay[i]);
+
+                    if (gDisp > GreenDisplay[i]) GreenDisplay[i] = gDisp;
+                    else GreenDisplay[i] += alpha * (gDisp - GreenDisplay[i]);
                 }
                 else
                 {
