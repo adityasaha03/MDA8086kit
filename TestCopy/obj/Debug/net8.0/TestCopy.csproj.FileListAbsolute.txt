@@ -1,5 +1,0 @@
-E:\Mda8086Kit\TestCopy\obj\Debug\net8.0\TestCopy.GeneratedMSBuildEditorConfig.editorconfig
-E:\Mda8086Kit\TestCopy\obj\Debug\net8.0\TestCopy.AssemblyInfoInputs.cache
-E:\Mda8086Kit\TestCopy\obj\Debug\net8.0\TestCopy.AssemblyInfo.cs
-E:\Mda8086Kit\TestCopy\obj\Debug\net8.0\TestCopy.csproj.CoreCompileInputs.cache
-E:\Mda8086Kit\TestCopy\obj\Debug\net8.0\TestCopy.sourcelink.json
