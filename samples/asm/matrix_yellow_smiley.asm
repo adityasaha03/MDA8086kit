@@ -3,7 +3,6 @@
 	; Configure CS2 to Mode 0, all output
 	MOV	AL,10000000B
 	OUT	1FH,AL
-	
 	; Turn off 7-segment completely (Active low)
 	MOV	AL,11111111B
 	OUT	19H,AL
@@ -12,23 +11,19 @@
 	MOV	AL,10000000B
 	OUT	1EH,AL
 	
-	; Turn off RED color on Dot Matrix
-	MOV	AL,11111111B
-	OUT	18H,AL
-	
 L1:	MOV	SI, OFFSET FONT
     MOV AH, 11111110B  
     
-L2:	
-    ; Prevent Ghosting: Turn off all scan lines before updating data
-    PUSH AX
-    MOV AL, 11111111B
-    OUT 1AH, AL
-    POP AX
+L2:	MOV AL, BYTE PTR CS:[SI]
     
-    MOV AL, BYTE PTR CS:[SI]
+    ; Output Green (Active High)
     OUT 1CH, AL
     
+    ; Output Red (Active Low) - INVERT to make YELLOW (Green + Red)
+    NOT AL
+    OUT 18H, AL
+    
+    ; Output Scanline
     MOV AL, AH
     OUT 1AH, AL
 	
@@ -40,8 +35,7 @@ L2:
 	JMP L1
 			
 TIMER:	
-    ; Reduced delay for emu8086 (so it doesn't take 2 minutes)
-    MOV	CX, 1H
+    MOV	CX, 10H
 TIMER1:	NOP
         NOP
         NOP
@@ -49,13 +43,12 @@ TIMER1:	NOP
         LOOP TIMER1
         RET      
         
-        
 FONT: 
-    DB 00011000B
-    DB 11111111B
-    DB 11000000B
-    DB 10000001B
-    DB 00000000B
-    DB 11100111B
-    DB 00011000B
-    DB 11111111B
+    DB 00111100B ; Col 0
+    DB 01000010B ; Col 1
+    DB 10101001B ; Col 2
+    DB 10000101B ; Col 3
+    DB 10000101B ; Col 4
+    DB 10101001B ; Col 5
+    DB 01000010B ; Col 6
+    DB 00111100B ; Col 7

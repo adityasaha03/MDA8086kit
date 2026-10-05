@@ -12,7 +12,11 @@
 	MOV	AL,10000000B
 	OUT	1EH,AL
 	
-	; Turn off RED color on Dot Matrix
+	; Turn off GREEN color on Dot Matrix (Active High -> 0 is OFF)
+	MOV	AL,00000000B
+	OUT	1CH,AL
+	
+	; Turn off RED color on Dot Matrix (Active Low -> 1 is OFF)
 	MOV	AL,11111111B
 	OUT	18H,AL
 	
@@ -27,10 +31,11 @@ L2:
     POP AX
     
     MOV AL, BYTE PTR CS:[SI]
-    OUT 1CH, AL
+    NOT AL              ; Invert because Red port is Active-Low!
+    OUT 18H, AL         ; Output to RED port instead of Green
     
     MOV AL, AH
-    OUT 1AH, AL
+    OUT 1AH, AL         ; Output Scan line
 	
 	CALL TIMER
 	INC SI
@@ -40,8 +45,8 @@ L2:
 	JMP L1
 			
 TIMER:	
-    ; Reduced delay for emu8086 (so it doesn't take 2 minutes)
-    MOV	CX, 1H
+    ; Reduced delay for emu8086
+    MOV	CX, 10H         ; Changed to 10H for better stability
 TIMER1:	NOP
         NOP
         NOP
@@ -51,11 +56,11 @@ TIMER1:	NOP
         
         
 FONT: 
-    DB 00011000B
-    DB 11111111B
-    DB 11000000B
-    DB 10000001B
     DB 00000000B
-    DB 11100111B
-    DB 00011000B
-    DB 11111111B
+    DB 00111111B
+    DB 01001000B
+    DB 10001000B
+    DB 10001000B
+    DB 01001000B
+    DB 00111111B
+    DB 00000000B

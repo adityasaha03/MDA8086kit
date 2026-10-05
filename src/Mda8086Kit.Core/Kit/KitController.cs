@@ -78,9 +78,9 @@ namespace Mda8086Kit.Core.Kit
                         }
                         else if (deviceName == "DOT MATRIX 8 x 8" && ppi.Name == "CS1")
                         {
-                            ppi.OnCpuWrite(0x18, 0x00, 0); // Port A
-                            ppi.OnCpuWrite(0x1A, 0x00, 0); // Port B
-                            ppi.OnCpuWrite(0x1C, 0x00, 0); // Port C
+                            ppi.OnCpuWrite(0x18, 0xFF, 0); // Port A (Red Data, Active-Low)
+                            ppi.OnCpuWrite(0x1A, 0xFF, 0); // Port B (Scan, Active-Low)
+                            ppi.OnCpuWrite(0x1C, 0x00, 0); // Port C (Green Data, Active-High)
                             clearedPorts.AddRange(new[] { 0x18, 0x1A, 0x1C });
                             _matrixIntegrator.Reset();
                         }
