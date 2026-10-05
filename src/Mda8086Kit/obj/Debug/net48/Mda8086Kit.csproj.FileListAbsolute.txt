@@ -9,9 +9,5 @@ E:\Mda8086Kit\src\Mda8086Kit\obj\Debug\net48\Mda8086Kit.csproj.CoreCompileInputs
 E:\Mda8086Kit\src\Mda8086Kit\obj\Debug\net48\Mda8086Kit.sourcelink.json
 E:\Mda8086Kit\src\Mda8086Kit\obj\Debug\net48\MDA8086_Kit.exe
 E:\Mda8086Kit\src\Mda8086Kit\obj\Debug\net48\MDA8086_Kit.pdb
-E:\Mda8086Kit\src\Mda8086Kit\bin\Debug\net48\Costura.dll
-E:\Mda8086Kit\src\Mda8086Kit\bin\Debug\net48\Mda8086Kit.Core.dll
-E:\Mda8086Kit\src\Mda8086Kit\bin\Debug\net48\Mda8086Kit.Io.dll
-E:\Mda8086Kit\src\Mda8086Kit\bin\Debug\net48\Mda8086Kit.Core.pdb
-E:\Mda8086Kit\src\Mda8086Kit\bin\Debug\net48\Mda8086Kit.Io.pdb
-E:\Mda8086Kit\src\Mda8086Kit\obj\Debug\net48\Mda8086Kit.csproj.Up2Date
+E:\Mda8086Kit\src\Mda8086Kit\obj\Debug\net48\Mda8086Kit.csproj.Fody.CopyLocal.cache
+E:\Mda8086Kit\src\Mda8086Kit\obj\Debug\net48\Mda8086Kit.csproj.Fody.RuntimeCopyLocal.cache

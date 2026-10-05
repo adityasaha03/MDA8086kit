@@ -62,7 +62,8 @@ namespace Mda8086Kit.Controls
                 FlatStyle = FlatStyle.Flat,
                 BackColor = Color.FromArgb(245, 247, 250),
                 ForeColor = Color.FromArgb(80, 90, 110),
-                Cursor = Cursors.Hand
+                Cursor = Cursors.Hand,
+                Padding = new Padding(0, 0, 0, 0)
             };
             _clearButton.FlatAppearance.BorderSize = 1;
             _clearButton.FlatAppearance.BorderColor = Color.FromArgb(220, 225, 235);

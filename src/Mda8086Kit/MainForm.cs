@@ -107,7 +107,8 @@ namespace Mda8086Kit
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
                 Font = new Font("Segoe UI", 9f, FontStyle.Bold),
-                Cursor = Cursors.Hand
+                Cursor = Cursors.Hand,
+                Padding = new Padding(0, 3, 0, 0)
             };
             pinBtn.FlatAppearance.BorderSize = 0;
             pinBtn.Click += (s, e) => 
@@ -134,6 +135,7 @@ namespace Mda8086Kit
                 MessageBox.Show(
                     "MDA-8086 Virtual Kit (unofficial)\n\n" +
                     "An emulator interface for the MDA-8086 trainer kit, designed to connect with emu8086.\n\n" +
+                    "Developed by Aditya Saha | GitHub: adityasaha03\n" +
                     "Version 1.0\n",
                     "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
             };

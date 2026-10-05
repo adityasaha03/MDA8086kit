@@ -66,15 +66,14 @@ namespace Mda8086Kit.Controls
 
             Color ledBase = isOn ? activeColor : Color.FromArgb(40, activeColor);
             
-            using (GraphicsPath ledPath = new GraphicsPath())
+            using (SolidBrush sb = new SolidBrush(ledBase))
             {
-                ledPath.AddEllipse(ledRect);
-                using (PathGradientBrush pgb = new PathGradientBrush(ledPath))
-                {
-                    pgb.CenterColor = Color.White;
-                    pgb.SurroundColors = new Color[] { ledBase };
-                    g.FillEllipse(pgb, ledRect);
-                }
+                g.FillEllipse(sb, ledRect);
+            }
+
+            using (Pen borderPen = new Pen(Color.FromArgb(60, Color.Black), 1.5f))
+            {
+                g.DrawEllipse(borderPen, ledRect);
             }
 
             // Label
