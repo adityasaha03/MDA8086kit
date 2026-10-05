@@ -13,7 +13,7 @@ namespace Mda8086Kit.Controls
         public DotMatrixControl()
         {
             DoubleBuffered = true;
-            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint | ControlStyles.ResizeRedraw, true);
         }
 
         public void UpdateState(DotMatrixState state)
@@ -26,13 +26,26 @@ namespace Mda8086Kit.Controls
         {
             base.OnPaint(e);
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            e.Graphics.Clear(Color.Black);
+
+            // Draw dark rounded background
+            Rectangle bgRect = new Rectangle(0, 0, Width - 1, Height - 1);
+            using (GraphicsPath path = GetRoundedRectPath(bgRect, 12))
+            {
+                using (Brush b = new SolidBrush(Color.FromArgb(18, 20, 24)))
+                {
+                    e.Graphics.FillPath(b, path);
+                }
+            }
 
             if (_state == null) return;
 
-            int cellW = Width / 8;
-            int cellH = Height / 8;
-            int padding = 2;
+            int padX = 10;
+            int padY = 10;
+            int gridW = Width - padX * 2;
+            int gridH = Height - padY * 2;
+            int cellW = gridW / 8;
+            int cellH = gridH / 8;
+            int dotPadding = Math.Max(2, cellW / 8);
 
             for (int r = 0; r < 8; r++)
             {
@@ -45,21 +58,45 @@ namespace Mda8086Kit.Controls
                     int rVal = Math.Min(255, (int)(redDuty * 255));
                     int gVal = Math.Min(255, (int)(greenDuty * 255));
                     
-                    // Blend to amber if both are on
-                    Color ledColor = Color.FromArgb(255, rVal, gVal, 0);
-                    
+                    Color ledColor;
                     if (rVal == 0 && gVal == 0)
                     {
-                        ledColor = Color.FromArgb(40, 40, 40); // Off state
+                        ledColor = Color.FromArgb(28, 33, 40); // Off state
+                    }
+                    else
+                    {
+                        // Blend to amber if both are on
+                        ledColor = Color.FromArgb(255, rVal, gVal, 0);
                     }
 
-                    Rectangle rect = new Rectangle(c * cellW + padding, r * cellH + padding, cellW - padding * 2, cellH - padding * 2);
+                    Rectangle rect = new Rectangle(padX + c * cellW + dotPadding, padY + r * cellH + dotPadding, cellW - dotPadding * 2, cellH - dotPadding * 2);
                     using (Brush b = new SolidBrush(ledColor))
                     {
                         e.Graphics.FillEllipse(b, rect);
                     }
                 }
             }
+        }
+        
+        private GraphicsPath GetRoundedRectPath(Rectangle bounds, int radius)
+        {
+            GraphicsPath path = new GraphicsPath();
+            if (radius <= 0)
+            {
+                path.AddRectangle(bounds);
+                return path;
+            }
+            int diameter = radius * 2;
+            Rectangle arc = new Rectangle(bounds.Location, new Size(diameter, diameter));
+            path.AddArc(arc, 180, 90);
+            arc.X = bounds.Right - diameter;
+            path.AddArc(arc, 270, 90);
+            arc.Y = bounds.Bottom - diameter;
+            path.AddArc(arc, 0, 90);
+            arc.X = bounds.Left;
+            path.AddArc(arc, 90, 90);
+            path.CloseFigure();
+            return path;
         }
     }
 }

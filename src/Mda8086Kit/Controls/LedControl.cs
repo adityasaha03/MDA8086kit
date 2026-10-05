@@ -13,7 +13,7 @@ namespace Mda8086Kit.Controls
         public LedControl()
         {
             DoubleBuffered = true;
-            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint | ControlStyles.ResizeRedraw, true);
         }
 
         public void UpdateState(LedState state)
@@ -27,34 +27,91 @@ namespace Mda8086Kit.Controls
             base.OnPaint(e);
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-            int ledRadius = Math.Min(Width / 8, Height / 2) - 4;
-            int spacing = Width / 4;
-            
-            DrawLed(e.Graphics, "R1", 0 * spacing + spacing / 2, Height / 2, ledRadius, Color.Red, _state.R1);
-            DrawLed(e.Graphics, "G",  1 * spacing + spacing / 2, Height / 2, ledRadius, Color.LimeGreen, _state.G);
-            DrawLed(e.Graphics, "Y",  2 * spacing + spacing / 2, Height / 2, ledRadius, Color.Gold, _state.Y);
-            DrawLed(e.Graphics, "R2", 3 * spacing + spacing / 2, Height / 2, ledRadius, Color.Red, _state.R2);
+            int padding = 5;
+            int gap = 10;
+            int cardW = (Width - padding * 2 - gap) / 2;
+            int cardH = (Height - padding * 2 - gap) / 2;
+
+            // R1
+            DrawLedCard(e.Graphics, new Rectangle(padding, padding, cardW, cardH), "R1", Color.FromArgb(255, 100, 100), _state.R1);
+            // G
+            DrawLedCard(e.Graphics, new Rectangle(padding + cardW + gap, padding, cardW, cardH), "G", Color.FromArgb(100, 255, 150), _state.G);
+            // Y
+            DrawLedCard(e.Graphics, new Rectangle(padding, padding + cardH + gap, cardW, cardH), "Y", Color.FromArgb(255, 220, 100), _state.Y);
+            // R2
+            DrawLedCard(e.Graphics, new Rectangle(padding + cardW + gap, padding + cardH + gap, cardW, cardH), "R2", Color.FromArgb(255, 100, 100), _state.R2);
         }
 
-        private void DrawLed(Graphics g, string label, int cx, int cy, int radius, Color activeColor, bool isOn)
+        private void DrawLedCard(Graphics g, Rectangle bounds, string label, Color activeColor, bool isOn)
         {
-            Rectangle rect = new Rectangle(cx - radius, cy - radius, radius * 2, radius * 2);
-            
-            using (Brush b = new SolidBrush(isOn ? activeColor : Color.FromArgb(64, activeColor)))
+            // Inner card background
+            using (GraphicsPath path = GetRoundedRectPath(bounds, 12))
             {
-                g.FillEllipse(b, rect);
-            }
-            
-            using (Pen p = new Pen(Color.FromArgb(100, 255, 255, 255), 2))
-            {
-                g.DrawEllipse(p, rect);
+                using (Brush b = new SolidBrush(Color.FromArgb(248, 250, 252)))
+                {
+                    g.FillPath(b, path);
+                }
+                using (Pen p = new Pen(Color.FromArgb(235, 240, 245)))
+                {
+                    g.DrawPath(p, path);
+                }
             }
 
-            using (Font f = new Font("Segoe UI", radius / 1.5f, FontStyle.Bold))
+            // Draw LED
+            int ledRadius = Math.Min(bounds.Width / 4, bounds.Height / 3);
+            int cx = bounds.Left + bounds.Width / 3;
+            int cy = bounds.Top + bounds.Height / 2;
+
+            Rectangle ledRect = new Rectangle(cx - ledRadius, cy - ledRadius, ledRadius * 2, ledRadius * 2);
+
+            Color ledBase = isOn ? activeColor : Color.FromArgb(40, activeColor);
+            
+            using (GraphicsPath ledPath = new GraphicsPath())
             {
-                SizeF size = g.MeasureString(label, f);
-                g.DrawString(label, f, Brushes.White, cx - size.Width / 2, cy - size.Height / 2);
+                ledPath.AddEllipse(ledRect);
+                using (PathGradientBrush pgb = new PathGradientBrush(ledPath))
+                {
+                    pgb.CenterColor = Color.White;
+                    pgb.SurroundColors = new Color[] { ledBase };
+                    g.FillEllipse(pgb, ledRect);
+                }
             }
+
+            // Label
+            using (Font f = new Font("Segoe UI", ledRadius / 1.5f, FontStyle.Bold))
+            {
+                using (Brush b = new SolidBrush(Color.FromArgb(100, 110, 130)))
+                {
+                    StringFormat sf = new StringFormat
+                    {
+                        Alignment = StringAlignment.Center,
+                        LineAlignment = StringAlignment.Center
+                    };
+                    Rectangle textRect = new Rectangle(cx + ledRadius, bounds.Top, bounds.Width - (cx - bounds.Left) - ledRadius, bounds.Height);
+                    g.DrawString(label, f, b, textRect, sf);
+                }
+            }
+        }
+        
+        private GraphicsPath GetRoundedRectPath(Rectangle bounds, int radius)
+        {
+            GraphicsPath path = new GraphicsPath();
+            if (radius <= 0)
+            {
+                path.AddRectangle(bounds);
+                return path;
+            }
+            int diameter = radius * 2;
+            Rectangle arc = new Rectangle(bounds.Location, new Size(diameter, diameter));
+            path.AddArc(arc, 180, 90);
+            arc.X = bounds.Right - diameter;
+            path.AddArc(arc, 270, 90);
+            arc.Y = bounds.Bottom - diameter;
+            path.AddArc(arc, 0, 90);
+            arc.X = bounds.Left;
+            path.AddArc(arc, 90, 90);
+            path.CloseFigure();
+            return path;
         }
     }
 }

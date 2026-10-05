@@ -21,8 +21,8 @@ namespace Mda8086Kit
         public MainForm()
         {
             Text = "MDA-8086 Virtual Kit (unofficial)";
-            Size = new Size(800, 600);
-            BackColor = Color.FromArgb(30, 30, 30);
+            Size = new Size(880, 520);
+            BackColor = Color.FromArgb(235, 240, 246);
             
             _controller = new KitController(); 
             
@@ -45,37 +45,93 @@ namespace Mda8086Kit
 
         private void InitializeControls()
         {
+            int margin = 20;
+
             // 7 Segment
-            _sevenSeg1 = new SevenSegControl
+            _sevenSeg1 = new SevenSegControl();
+            var card7Seg = new ModuleCard 
             {
-                Location = new Point(50, 50),
-                Size = new Size(60, 100)
+                Title = "7-SEGMENT",
+                ContentControl = _sevenSeg1,
+                Location = new Point(margin, margin),
+                Size = new Size(200, 240)
             };
-            Controls.Add(_sevenSeg1);
+            card7Seg.ClearClicked += (s, e) => _controller.ClearDevice("7-SEGMENT");
+            Controls.Add(card7Seg);
 
             // LEDs
-            _ledControl = new LedControl
+            _ledControl = new LedControl();
+            var cardLeds = new ModuleCard 
             {
-                Location = new Point(50, 200),
-                Size = new Size(300, 60)
+                Title = "LEDS",
+                ContentControl = _ledControl,
+                Location = new Point(card7Seg.Right + margin, margin),
+                Size = new Size(280, 240)
             };
-            Controls.Add(_ledControl);
+            cardLeds.ClearClicked += (s, e) => _controller.ClearDevice("LEDS");
+            Controls.Add(cardLeds);
 
             // Dot Matrix
-            _dotMatrix = new DotMatrixControl
+            _dotMatrix = new DotMatrixControl();
+            var cardMatrix = new ModuleCard 
             {
-                Location = new Point(400, 50),
-                Size = new Size(300, 300)
+                Title = "DOT MATRIX 8 x 8",
+                ContentControl = _dotMatrix,
+                Location = new Point(cardLeds.Right + margin, margin),
+                Size = new Size(400, 440)
             };
-            Controls.Add(_dotMatrix);
+            cardMatrix.ClearClicked += (s, e) => _controller.ClearDevice("DOT MATRIX 8 x 8");
+            Controls.Add(cardMatrix);
 
             // LCD
-            _lcdControl = new LcdControl
+            _lcdControl = new LcdControl();
+            var cardLcd = new ModuleCard 
             {
-                Location = new Point(50, 300),
-                Size = new Size(300, 50)
+                Title = "LCD 16 x 2",
+                ContentControl = _lcdControl,
+                Location = new Point(margin, card7Seg.Bottom + margin),
+                Size = new Size(cardLeds.Right - margin, 180)
             };
-            Controls.Add(_lcdControl);
+            cardLcd.ClearClicked += (s, e) => _controller.ClearDevice("LCD 16 x 2");
+            Controls.Add(cardLcd);
+
+            // Adjust form size to fit perfectly with room for Reset
+            ClientSize = new Size(cardMatrix.Right + margin, cardMatrix.Bottom + margin + 60);
+
+            // Reset Button
+            var resetBtn = new Button
+            {
+                Text = "RESET KIT",
+                Location = new Point(margin, cardMatrix.Bottom + margin),
+                Size = new Size(120, 40),
+                BackColor = Color.FromArgb(220, 53, 69),
+                ForeColor = Color.White,
+                FlatStyle = FlatStyle.Flat,
+                Font = new Font("Segoe UI", 9f, FontStyle.Bold),
+                Cursor = Cursors.Hand
+            };
+            resetBtn.FlatAppearance.BorderSize = 0;
+            resetBtn.Click += (s, e) => _controller.Reset();
+            Controls.Add(resetBtn);
+
+            var pinBtn = new Button
+            {
+                Text = "📌 PIN TOP",
+                Location = new Point(resetBtn.Right + margin, resetBtn.Top),
+                Size = new Size(100, 40),
+                BackColor = Color.FromArgb(108, 117, 125),
+                ForeColor = Color.White,
+                FlatStyle = FlatStyle.Flat,
+                Font = new Font("Segoe UI", 9f, FontStyle.Bold),
+                Cursor = Cursors.Hand
+            };
+            pinBtn.FlatAppearance.BorderSize = 0;
+            pinBtn.Click += (s, e) => 
+            {
+                this.TopMost = !this.TopMost;
+                pinBtn.BackColor = this.TopMost ? Color.FromArgb(40, 167, 69) : Color.FromArgb(108, 117, 125);
+            };
+            Controls.Add(pinBtn);
         }
 
         private void OnUiTimerTick(object sender, EventArgs e)

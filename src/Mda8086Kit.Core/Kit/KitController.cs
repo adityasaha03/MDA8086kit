@@ -44,6 +44,47 @@ namespace Mda8086Kit.Core.Kit
             return Volatile.Read(ref _latestSnapshot);
         }
 
+        public void Reset()
+        {
+            lock (SyncRoot)
+            {
+                foreach (var device in _devices)
+                {
+                    device.Reset();
+                }
+                _sequenceNumber = 0;
+                _matrixIntegrator.Reset();
+            }
+        }
+
+        public void ClearDevice(string deviceName)
+        {
+            lock (SyncRoot)
+            {
+                foreach (var device in _devices)
+                {
+                    if (device is Devices.Ppi8255 ppi)
+                    {
+                        if (deviceName == "7-SEGMENT" && ppi.Name == "CS1")
+                            ppi.OnCpuWrite(0x10, 0x00, 0); // Port A
+                        else if (deviceName == "LEDS" && ppi.Name == "CS1")
+                            ppi.OnCpuWrite(0x12, 0x00, 0); // Port B
+                        else if (deviceName == "DOT MATRIX 8 x 8" && ppi.Name == "CS2")
+                        {
+                            ppi.OnCpuWrite(0x18, 0x00, 0); // Port A
+                            ppi.OnCpuWrite(0x1A, 0x00, 0); // Port B
+                            ppi.OnCpuWrite(0x1C, 0x00, 0); // Port C
+                            _matrixIntegrator.Reset();
+                        }
+                    }
+                    else if (device is Devices.LcdDevice lcd && deviceName == "LCD 16 x 2")
+                    {
+                        lcd.Reset();
+                    }
+                }
+            }
+        }
+
         public void OnPoll(PortBatch batch, long ticks)
         {
             lock (SyncRoot)

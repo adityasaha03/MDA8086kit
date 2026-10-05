@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "e:\\Mda8086Kit\\tools\\PortLogAnalyzer\\PortLogAnalyzer.csproj": {}
+    "E:\\Mda8086Kit\\tools\\PortLogAnalyzer\\PortLogAnalyzer.csproj": {}
   },
   "projects": {
-    "e:\\Mda8086Kit\\tools\\PortLogAnalyzer\\PortLogAnalyzer.csproj": {
+    "E:\\Mda8086Kit\\tools\\PortLogAnalyzer\\PortLogAnalyzer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "e:\\Mda8086Kit\\tools\\PortLogAnalyzer\\PortLogAnalyzer.csproj",
+        "projectUniqueName": "E:\\Mda8086Kit\\tools\\PortLogAnalyzer\\PortLogAnalyzer.csproj",
         "projectName": "PortLogAnalyzer",
-        "projectPath": "e:\\Mda8086Kit\\tools\\PortLogAnalyzer\\PortLogAnalyzer.csproj",
+        "projectPath": "E:\\Mda8086Kit\\tools\\PortLogAnalyzer\\PortLogAnalyzer.csproj",
         "packagesPath": "C:\\Users\\aditya\\.nuget\\packages\\",
-        "outputPath": "e:\\Mda8086Kit\\tools\\PortLogAnalyzer\\obj\\",
+        "outputPath": "E:\\Mda8086Kit\\tools\\PortLogAnalyzer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\aditya\\AppData\\Roaming\\NuGet\\NuGet.Config"

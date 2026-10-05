@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "e:\\Mda8086Kit\\tools\\MatrixTuner\\MatrixTuner.csproj": {}
+    "E:\\Mda8086Kit\\tools\\MatrixTuner\\MatrixTuner.csproj": {}
   },
   "projects": {
-    "e:\\Mda8086Kit\\src\\Mda8086Kit.Core\\Mda8086Kit.Core.csproj": {
+    "E:\\Mda8086Kit\\src\\Mda8086Kit.Core\\Mda8086Kit.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "e:\\Mda8086Kit\\src\\Mda8086Kit.Core\\Mda8086Kit.Core.csproj",
+        "projectUniqueName": "E:\\Mda8086Kit\\src\\Mda8086Kit.Core\\Mda8086Kit.Core.csproj",
         "projectName": "Mda8086Kit.Core",
-        "projectPath": "e:\\Mda8086Kit\\src\\Mda8086Kit.Core\\Mda8086Kit.Core.csproj",
+        "projectPath": "E:\\Mda8086Kit\\src\\Mda8086Kit.Core\\Mda8086Kit.Core.csproj",
         "packagesPath": "C:\\Users\\aditya\\.nuget\\packages\\",
-        "outputPath": "e:\\Mda8086Kit\\src\\Mda8086Kit.Core\\obj\\",
+        "outputPath": "E:\\Mda8086Kit\\src\\Mda8086Kit.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\aditya\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -66,14 +66,14 @@
         }
       }
     },
-    "e:\\Mda8086Kit\\tools\\MatrixTuner\\MatrixTuner.csproj": {
+    "E:\\Mda8086Kit\\tools\\MatrixTuner\\MatrixTuner.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "e:\\Mda8086Kit\\tools\\MatrixTuner\\MatrixTuner.csproj",
+        "projectUniqueName": "E:\\Mda8086Kit\\tools\\MatrixTuner\\MatrixTuner.csproj",
         "projectName": "MatrixTuner",
-        "projectPath": "e:\\Mda8086Kit\\tools\\MatrixTuner\\MatrixTuner.csproj",
+        "projectPath": "E:\\Mda8086Kit\\tools\\MatrixTuner\\MatrixTuner.csproj",
         "packagesPath": "C:\\Users\\aditya\\.nuget\\packages\\",
-        "outputPath": "e:\\Mda8086Kit\\tools\\MatrixTuner\\obj\\",
+        "outputPath": "E:\\Mda8086Kit\\tools\\MatrixTuner\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\aditya\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -88,8 +88,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "e:\\Mda8086Kit\\src\\Mda8086Kit.Core\\Mda8086Kit.Core.csproj": {
-                "projectPath": "e:\\Mda8086Kit\\src\\Mda8086Kit.Core\\Mda8086Kit.Core.csproj"
+              "E:\\Mda8086Kit\\src\\Mda8086Kit.Core\\Mda8086Kit.Core.csproj": {
+                "projectPath": "E:\\Mda8086Kit\\src\\Mda8086Kit.Core\\Mda8086Kit.Core.csproj"
               }
             }
           }

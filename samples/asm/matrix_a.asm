@@ -4,7 +4,7 @@
 ; Timeline: OUT 1EH,80H -> OUT 18H,0FFH -> Loop: OUT 1AH,font[i] -> OUT 1CH, (1<<i) -> DELAY -> Next
 ; Answers: IT-3, SC-1
 
-    ORG 1000H
+    ORG 0100H
 
 START:
     ; Set CS1 to Mode 0, All Output
@@ -31,7 +31,7 @@ SCAN_LOOP:
 
     ; Delay
     PUSH CX
-    MOV CX, 300     ; COLDELAY parameter
+    MOV CX, 1     ; COLDELAY parameter
 DELAY_LOOP:
     NOP
     LOOP DELAY_LOOP
@@ -43,5 +43,15 @@ DELAY_LOOP:
 
     JMP MAIN_LOOP
 
+;FONT:
+;    DB 0FFH, 0C0H, 0B7H, 77H, 77H, 0B7H, 0C0H, 0FFH
+
 FONT:
-    DB 0FFH, 0C0H, 0B7H, 77H, 77H, 0B7H, 0C0H, 0FFH
+    DB 11111011B
+    DB 11111011B
+    DB 11110011B
+    DB 11011011B
+    DB 11011011B
+    DB 11111011B
+    DB 11111011B
+    DB 11111011B

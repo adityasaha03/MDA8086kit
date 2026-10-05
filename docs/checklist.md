@@ -16,10 +16,9 @@
   - [x] Handle 4-bit mode safely (or ignore if always 8-bit, check plan)
   - [x] Handle S1 burst mode/write-sequence via Port 30H
   - [x] Unit tests for characters and clearing
-- [x] **PH2-03: Single LEDs & Matrix keys (`LedIndicators.cs`, `Keypad.cs`)**
+- [x] **PH2-03: Single LEDs (`LedIndicators.cs`)**
   - [x] Implement single LEDs (listen to port 0x0F usually)
-  - [x] Implement `Keypad` matrix logic
-  - [x] Unit tests for LEDs and Keypad
+  - [x] Unit tests for LEDs
 
 ## Phase 3: Dot Matrix (M3)
 - [x] PH3-01: DotMatrixModel pin decode and orientation
@@ -37,11 +36,8 @@
 - [ ] PH4-06: Conditional LCD stream mitigation
 - [x] PH4-07: Sample program lcd_hello.asm
 
-## Phase 5: Keypad and reset (M5)
-- [ ] PH5-01: KeypadModel, IKeypadProtocol
-- [ ] PH5-02: KeypadControl and mapping
-- [ ] PH5-03: Reset button
-- [ ] PH5-05: Final keypad protocol
+## Phase 5: Reset (M5)
+- [x] PH5-03: Reset button
 
 ## Phase 6: Hardening and release (M6)
 - [ ] PH6-01: Settings persistence

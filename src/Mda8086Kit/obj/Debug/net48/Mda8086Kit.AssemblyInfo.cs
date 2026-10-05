@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MDA8086_Kit")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3c494567047e1bf3c0bd65fcb4ef081141f92cc0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9645f124e3771fc70085af5ec8dff80fbe19efeb")]
 [assembly: System.Reflection.AssemblyProductAttribute("MDA8086_Kit")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MDA8086_Kit")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
