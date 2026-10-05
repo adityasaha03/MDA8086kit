@@ -13,6 +13,7 @@ namespace Mda8086Kit.Core.Kit
         private bool _running;
         private readonly byte[] _lastBuffer;
         private readonly byte[] _currentBuffer;
+        private DateTime _lastFileTime = DateTime.MinValue;
 
         public BusPoller(IPortSource source, KitController controller)
         {
@@ -42,6 +43,15 @@ namespace Mda8086Kit.Core.Kit
             {
                 if (_source.TryReadRange(0, _currentBuffer, 65536))
                 {
+                    DateTime currentFileTime = _source.LastUpdated;
+                    if (currentFileTime > _lastFileTime)
+                    {
+                        // File was written to by a new emulator run.
+                        // Force a sync of all non-zero bytes to detect consecutive identical runs.
+                        _lastFileTime = currentFileTime;
+                        Array.Clear(_lastBuffer, 0, _lastBuffer.Length);
+                    }
+
                     var batch = new PortBatch();
                     for (int i = 0; i < 65536; i++)
                     {

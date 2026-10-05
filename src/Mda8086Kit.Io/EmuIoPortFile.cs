@@ -10,6 +10,20 @@ namespace Mda8086Kit.Io
         private FileStream _stream;
 
         public ConnectionState State { get; private set; }
+        public DateTime LastUpdated 
+        {
+            get 
+            {
+                try 
+                {
+                    return File.GetLastWriteTime(_path);
+                } 
+                catch 
+                {
+                    return DateTime.MinValue;
+                }
+            }
+        }
 
         public EmuIoPortFile(string path)
         {

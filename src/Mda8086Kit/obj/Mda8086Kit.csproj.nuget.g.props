@@ -12,4 +12,7 @@
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <SourceRoot Include="C:\Users\aditya\.nuget\packages\" />
   </ItemGroup>
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)costura.fody\6.2.0\build\Costura.Fody.props" Condition="Exists('$(NuGetPackageRoot)costura.fody\6.2.0\build\Costura.Fody.props')" />
+  </ImportGroup>
 </Project>

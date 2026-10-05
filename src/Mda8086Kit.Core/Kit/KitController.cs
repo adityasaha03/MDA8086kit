@@ -57,8 +57,9 @@ namespace Mda8086Kit.Core.Kit
             }
         }
 
-        public void ClearDevice(string deviceName)
+        public int[] ClearDevice(string deviceName)
         {
+            var clearedPorts = new List<int>();
             lock (SyncRoot)
             {
                 foreach (var device in _devices)
@@ -66,23 +67,32 @@ namespace Mda8086Kit.Core.Kit
                     if (device is Devices.Ppi8255 ppi)
                     {
                         if (deviceName == "7-SEGMENT" && ppi.Name == "CS2")
+                        {
                             ppi.OnCpuWrite(0x19, 0x00, 0); // Port A
+                            clearedPorts.Add(0x19);
+                        }
                         else if (deviceName == "LEDS" && ppi.Name == "CS2")
+                        {
                             ppi.OnCpuWrite(0x1B, 0x00, 0); // Port B
+                            clearedPorts.Add(0x1B);
+                        }
                         else if (deviceName == "DOT MATRIX 8 x 8" && ppi.Name == "CS1")
                         {
                             ppi.OnCpuWrite(0x18, 0x00, 0); // Port A
                             ppi.OnCpuWrite(0x1A, 0x00, 0); // Port B
                             ppi.OnCpuWrite(0x1C, 0x00, 0); // Port C
+                            clearedPorts.AddRange(new[] { 0x18, 0x1A, 0x1C });
                             _matrixIntegrator.Reset();
                         }
                     }
                     else if (device is Devices.LcdDevice lcd && deviceName == "LCD 16 x 2")
                     {
                         lcd.Reset();
+                        clearedPorts.AddRange(new[] { 0x30, 0x32 });
                     }
                 }
             }
+            return clearedPorts.ToArray();
         }
 
         public void OnPoll(PortBatch batch, long ticks)
