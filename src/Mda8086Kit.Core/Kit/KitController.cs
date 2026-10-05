@@ -65,11 +65,11 @@ namespace Mda8086Kit.Core.Kit
                 {
                     if (device is Devices.Ppi8255 ppi)
                     {
-                        if (deviceName == "7-SEGMENT" && ppi.Name == "CS1")
-                            ppi.OnCpuWrite(0x10, 0x00, 0); // Port A
-                        else if (deviceName == "LEDS" && ppi.Name == "CS1")
-                            ppi.OnCpuWrite(0x12, 0x00, 0); // Port B
-                        else if (deviceName == "DOT MATRIX 8 x 8" && ppi.Name == "CS2")
+                        if (deviceName == "7-SEGMENT" && ppi.Name == "CS2")
+                            ppi.OnCpuWrite(0x19, 0x00, 0); // Port A
+                        else if (deviceName == "LEDS" && ppi.Name == "CS2")
+                            ppi.OnCpuWrite(0x1B, 0x00, 0); // Port B
+                        else if (deviceName == "DOT MATRIX 8 x 8" && ppi.Name == "CS1")
                         {
                             ppi.OnCpuWrite(0x18, 0x00, 0); // Port A
                             ppi.OnCpuWrite(0x1A, 0x00, 0); // Port B
@@ -120,7 +120,7 @@ namespace Mda8086Kit.Core.Kit
 
                 foreach (var device in _devices)
                 {
-                    if (device is Devices.Ppi8255 ppi && ppi.Name == "CS2")
+                    if (device is Devices.Ppi8255 ppi && ppi.Name == "CS1")
                     {
                         dotMatrixModel.Decode(
                             ppi.GetPinStateA(), 
@@ -147,7 +147,7 @@ namespace Mda8086Kit.Core.Kit
                     {
                         if (device is Devices.Ppi8255 ppi)
                         {
-                            if (ppi.Name == "CS1")
+                            if (ppi.Name == "CS2")
                             {
                                 var sevenSegModel = new Devices.SevenSegmentModel();
                                 var ledBank = new Devices.LedBank();

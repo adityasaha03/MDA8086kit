@@ -30,6 +30,11 @@ namespace Mda8086Kit.Core.Kit
             _thread.Start();
         }
 
+        public void Reseed()
+        {
+            Array.Clear(_lastBuffer, 0, _lastBuffer.Length);
+        }
+
         private void Loop()
         {
             var sw = Stopwatch.StartNew();
@@ -52,8 +57,8 @@ namespace Mda8086Kit.Core.Kit
                         // Ensure control ports (like 1EH) are processed BEFORE data ports
                         batch.Sort((a, b) => 
                         {
-                            bool aCtrl = (a.Port == 0x16 || a.Port == 0x1E);
-                            bool bCtrl = (b.Port == 0x16 || b.Port == 0x1E);
+                            bool aCtrl = (a.Port == 0x16 || a.Port == 0x1E || a.Port == 0x1F);
+                            bool bCtrl = (b.Port == 0x16 || b.Port == 0x1E || b.Port == 0x1F);
                             if (aCtrl && !bCtrl) return -1;
                             if (!aCtrl && bCtrl) return 1;
                             return a.Port.CompareTo(b.Port);

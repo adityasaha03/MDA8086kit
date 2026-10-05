@@ -27,8 +27,8 @@ namespace Mda8086Kit
             _controller = new KitController(); 
             
             // Add real devices
-            _controller.AddDevice(new Core.Devices.Ppi8255("CS1", 0x10, 0x12, 0x14, 0x16, null));
-            _controller.AddDevice(new Core.Devices.Ppi8255("CS2", 0x18, 0x1A, 0x1C, 0x1E, null));
+            _controller.AddDevice(new Core.Devices.Ppi8255("CS1", 0x18, 0x1A, 0x1C, 0x1E, null));
+            _controller.AddDevice(new Core.Devices.Ppi8255("CS2", 0x19, 0x1B, 0x1D, 0x1F, null));
             _controller.AddDevice(new Core.Devices.LcdDevice());
 
             // Wire up IO and Poller
@@ -98,26 +98,10 @@ namespace Mda8086Kit
             // Adjust form size to fit perfectly with room for Reset
             ClientSize = new Size(cardMatrix.Right + margin, cardMatrix.Bottom + margin + 60);
 
-            // Reset Button
-            var resetBtn = new Button
-            {
-                Text = "RESET KIT",
-                Location = new Point(margin, cardMatrix.Bottom + margin),
-                Size = new Size(120, 40),
-                BackColor = Color.FromArgb(220, 53, 69),
-                ForeColor = Color.White,
-                FlatStyle = FlatStyle.Flat,
-                Font = new Font("Segoe UI", 9f, FontStyle.Bold),
-                Cursor = Cursors.Hand
-            };
-            resetBtn.FlatAppearance.BorderSize = 0;
-            resetBtn.Click += (s, e) => _controller.Reset();
-            Controls.Add(resetBtn);
-
             var pinBtn = new Button
             {
                 Text = "📌 PIN TOP",
-                Location = new Point(resetBtn.Right + margin, resetBtn.Top),
+                Location = new Point(margin, cardMatrix.Bottom + margin),
                 Size = new Size(100, 40),
                 BackColor = Color.FromArgb(108, 117, 125),
                 ForeColor = Color.White,
@@ -132,6 +116,51 @@ namespace Mda8086Kit
                 pinBtn.BackColor = this.TopMost ? Color.FromArgb(40, 167, 69) : Color.FromArgb(108, 117, 125);
             };
             Controls.Add(pinBtn);
+
+            var aboutBtn = new Button
+            {
+                Text = "ℹ ABOUT",
+                Location = new Point(pinBtn.Right + margin, pinBtn.Top),
+                Size = new Size(100, 40),
+                BackColor = Color.FromArgb(23, 162, 184),
+                ForeColor = Color.White,
+                FlatStyle = FlatStyle.Flat,
+                Font = new Font("Segoe UI", 9f, FontStyle.Bold),
+                Cursor = Cursors.Hand
+            };
+            aboutBtn.FlatAppearance.BorderSize = 0;
+            aboutBtn.Click += (s, e) => 
+            {
+                MessageBox.Show(
+                    "MDA-8086 Virtual Kit (unofficial)\n\n" +
+                    "An emulator interface for the MDA-8086 trainer kit, designed to connect with emu8086.\n\n" +
+                    "Version 1.0\n",
+                    "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            };
+            Controls.Add(aboutBtn);
+
+            var portsBtn = new Button
+            {
+                Text = "? PORTS",
+                Location = new Point(ClientSize.Width - 100 - margin, pinBtn.Top),
+                Size = new Size(100, 40),
+                BackColor = Color.FromArgb(253, 126, 20),
+                ForeColor = Color.White,
+                FlatStyle = FlatStyle.Flat,
+                Font = new Font("Segoe UI", 9f, FontStyle.Bold),
+                Cursor = Cursors.Hand
+            };
+            portsBtn.FlatAppearance.BorderSize = 0;
+            portsBtn.Click += (s, e) => 
+            {
+                MessageBox.Show(
+                    "MDA-8086 Port Assignments:\n\n" +
+                    "CS1 (Dot Matrix)\n- Port A: 18H\n- Port B: 1AH\n- Port C: 1CH\n- Control: 1EH\n\n" +
+                    "CS2 (7-Segment & LEDs)\n- Port A: 19H\n- Port B: 1BH\n- Port C: 1DH\n- Control: 1FH\n\n" +
+                    "LCD 16x2\n- Control: 30H\n- Data: 32H",
+                    "Port Reference Guide", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            };
+            Controls.Add(portsBtn);
         }
 
         private void OnUiTimerTick(object sender, EventArgs e)

@@ -32,8 +32,8 @@
 - [x] PH4-02: Hd44780Lcd model
 - [x] PH4-03: LCD controller wiring and status publishing
 - [x] PH4-04: LcdControl
-- [ ] PH4-05: Power-up state option
-- [ ] PH4-06: Conditional LCD stream mitigation
+- [x] PH4-05: Power-up state option
+- [x] PH4-06: Conditional LCD stream mitigation
 - [x] PH4-07: Sample program lcd_hello.asm
 
 ## Phase 5: Reset (M5)
@@ -41,6 +41,6 @@
 
 ## Phase 6: Hardening and release (M6)
 - [ ] PH6-01: Settings persistence
-- [ ] PH6-02: Theme, DPI, About
+- [x] PH6-02: Theme, DPI, About
 - [ ] PH6-03: Packaging
 - [ ] PH6-04: Documentation

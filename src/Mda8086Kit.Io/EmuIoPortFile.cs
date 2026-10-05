@@ -30,7 +30,8 @@ namespace Mda8086Kit.Io
                 long len = _stream.Length;
                 if (len <= firstPort)
                 {
-                    // File hasn't reached this port yet, nothing to read
+                    // File hasn't reached this port yet, zero the buffer
+                    Array.Clear(buffer, 0, count);
                     return true; 
                 }
 
@@ -38,10 +39,10 @@ namespace Mda8086Kit.Io
                 _stream.Seek(firstPort, SeekOrigin.Begin);
                 int read = _stream.Read(buffer, 0, toRead);
                 
-                if (read < toRead)
+                if (read < count)
                 {
-                    State = new ConnectionState(ConnectionStatus.PartialRead, "Partial Read", "emu8086 is still creating the file.");
-                    return false;
+                    // Zero out the rest of the buffer to reflect the file's current size
+                    Array.Clear(buffer, read, count - read);
                 }
 
                 State = new ConnectionState(ConnectionStatus.Connected, "Connected", "");

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Mda8086Kit.Io.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9645f124e3771fc70085af5ec8dff80fbe19efeb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a75dfa1224c837b0c6ad92f90fe4a9bb692642b2")]
 [assembly: System.Reflection.AssemblyProductAttribute("Mda8086Kit.Io.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Mda8086Kit.Io.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

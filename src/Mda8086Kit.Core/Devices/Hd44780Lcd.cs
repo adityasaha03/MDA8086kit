@@ -2,6 +2,12 @@ using System;
 
 namespace Mda8086Kit.Core.Devices
 {
+    public enum LcdPowerUpState
+    {
+        Hd44780,     // Real bare LCD behavior: Display Off
+        MonitorLike  // MDA-8086 kit behavior: Monitor leaves Display On
+    }
+
     public class Hd44780Lcd
     {
         // 2x16 standard HD44780 display
@@ -13,6 +19,8 @@ namespace Mda8086Kit.Core.Devices
         public bool DisplayOn { get; private set; }
         public bool CursorOn { get; private set; }
         public bool BlinkOn { get; private set; }
+
+        public LcdPowerUpState PowerUpState { get; set; } = LcdPowerUpState.MonitorLike;
 
         private bool _isCgRamAddress;
         private int _addressCounter;
@@ -26,9 +34,8 @@ namespace Mda8086Kit.Core.Devices
         {
             CursorRow = 0;
             CursorCol = 0;
-            // Defaulting DisplayOn to true mitigates dropped initialization commands 
-            // when emu8086 runs too fast (per PH4-05 power-up options).
-            DisplayOn = true;
+            
+            DisplayOn = (PowerUpState == LcdPowerUpState.MonitorLike);
             CursorOn = false;
             BlinkOn = false;
             _addressCounter = 0;
