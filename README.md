@@ -15,6 +15,11 @@ For architecture and design records, check the [docs folder](docs).
 - **Hardware-Accurate Port Maps** (Supports `CS1` and `CS2` through emulated 8255 Programmable Peripheral Interfaces)
 - **Single Executable Delivery** (Drop into your `emu8086/devices` folder and go)
 
+## Download & Installation
+1. Go to the [Releases page](../../releases/latest) on the right side of this repository.
+2. Download the latest `MDA8086_Kit_vX.Y.Z.zip` file.
+3. Extract the ZIP and copy `MDA8086_Kit.exe` into your `emu8086\devices` directory.
+
 ## Quick Start
 1. Ensure the compiled `MDA8086_Kit.exe` is in your `emu8086\devices` directory.
 2. In your assembly source file, use `#start=MDA8086_Kit.exe#` on the first line.
