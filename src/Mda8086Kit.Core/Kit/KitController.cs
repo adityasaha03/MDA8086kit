@@ -141,6 +141,8 @@ namespace Mda8086Kit.Core.Kit
                     }
                 }
 
+                if (currentG != 0) Console.WriteLine($"DIAG: currentG = {currentG:X16}");
+
                 _matrixIntegrator.SetInput(currentR, currentG);
                 _matrixIntegrator.Tick(ticks);
 

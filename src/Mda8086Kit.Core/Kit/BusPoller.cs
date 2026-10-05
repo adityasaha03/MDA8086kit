@@ -46,10 +46,13 @@ namespace Mda8086Kit.Core.Kit
                     DateTime currentFileTime = _source.LastUpdated;
                     if (currentFileTime > _lastFileTime)
                     {
-                        // File was written to by a new emulator run.
-                        // Force a sync of all non-zero bytes to detect consecutive identical runs.
+                        if (_lastFileTime != DateTime.MinValue && (currentFileTime - _lastFileTime).TotalMilliseconds > 1000)
+                        {
+                            // It's been over a second since the last file write. This is likely a NEW run.
+                            // Force a sync of all non-zero bytes to detect consecutive identical runs.
+                            Array.Clear(_lastBuffer, 0, _lastBuffer.Length);
+                        }
                         _lastFileTime = currentFileTime;
-                        Array.Clear(_lastBuffer, 0, _lastBuffer.Length);
                     }
 
                     var batch = new PortBatch();
