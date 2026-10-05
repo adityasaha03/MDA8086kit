@@ -84,7 +84,7 @@ namespace Mda8086Kit.Core.Kit
                 // Emulate some device ticks even if no file I/O happened
                 _controller.OnPoll(new PortBatch(), sw.ElapsedMilliseconds);
 
-                Thread.Sleep(5); // ~200Hz polling
+                System.Threading.Tasks.Task.Delay(5).Wait(); // ~200Hz polling
             }
         }
 
