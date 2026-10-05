@@ -68,7 +68,7 @@ namespace Mda8086Kit.Core.Kit
                     {
                         if (deviceName == "7-SEGMENT" && ppi.Name == "CS2")
                         {
-                            ppi.OnCpuWrite(0x19, 0x00, 0); // Port A
+                            ppi.OnCpuWrite(0x19, 0xFF, 0); // Port A (Active low)
                             clearedPorts.Add(0x19);
                         }
                         else if (deviceName == "LEDS" && ppi.Name == "CS2")
