@@ -2,7 +2,19 @@
 PPIC_C EQU 1FH
 PPIC EQU 1DH
 PPIB EQU 1BH
-PPIA EQU 19H   
+PPIA EQU 19H 
+
+;----------------------------------
+	; Turn off Dot Matrix completely
+	MOV	AL,10000000B
+	OUT	1EH,AL        ; CS1 Control Register
+	MOV	AL,00000000B
+	OUT	1CH,AL        ; Green OFF
+	MOV	AL,11111111B
+	OUT	18H,AL        ; Red OFF
+    MOV AL,11111111B
+    OUT 1AH,AL        ; Scan OFF
+;-------------------------------------  
 
 MOV AL, 10000000B
 OUT PPIC_C, AL      ;goes to control register

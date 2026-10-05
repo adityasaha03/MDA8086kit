@@ -13,7 +13,7 @@ OUT PPIC, AL
 
 
 L1:    
-    MOV AL, 00000011B  
+    MOV AL, 00001011B  
     OUT PPIB, AL    
     
     JMP L1
